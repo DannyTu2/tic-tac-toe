@@ -12,9 +12,6 @@ function GameBoard() {
 
     const getBoard = () => board;
 
-    // const inputRow = prompt("What row number you want to input?"); 
-    // const inputCol = prompt("What col number you want to input?");
-
     const placeToken = (row, column, player) => {
         const availableCells = board.filter((row) => row[column].getValue() === 0).map(row => row[column]);
         if (!availableCells.length) return;
@@ -26,9 +23,18 @@ function GameBoard() {
         const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()))
         console.log(boardWithCellValues);
       };
+
+    const winningCondition = () => {
+        console.log("Goes into winning condition")
+        console.log("Using getValue() as well" + board[0][0].getValue())
+            if((board[0][0].getValue() === 1 && board[0][1].getValue() === 1 && board[0][2].getValue() === 1) || (board[0][0].getValue() === 2 && board[0][1].getValue() === 2 && board[0][2].getValue() === 2)  ) {
+                console.log("Player 1 is the winner")
+                return true; // trying to make it so it breaks in the for loop
+    }
+        
+    }
     
-    
-    return {getBoard, placeToken, printBoard};
+    return {getBoard, placeToken, printBoard, winningCondition};
 }
 
 function Cell() {
@@ -76,7 +82,6 @@ function GameController (
         console.log(`${getActivePlayer().name}'s turn.`);
       };
       
-      //TODO: Need to modify this logic for tic tac toe
       const playRound = (row, col) => {
         board.placeToken(row, col, getActivePlayer().token);
         switchPlayerTurn();
@@ -90,14 +95,16 @@ function GameController (
     for(let i = 0; i < 9; i++) {
         // for now
         // If one array is filled in the 2D array, then return winner. Horizontal Check
-
         // Diagonal Check
         // Vertical Check
-        // maybe create a new function called checkWinningCondition?     
+        // maybe create a new function called checkWinningCondition?
       const inputRow = prompt("What row number you want to input?"); 
       const inputCol = prompt("What col number you want to input?");
-      
       playRound(inputRow, inputCol);
+      if(board.winningCondition() == true) {
+        break;
+      }
+       
 
     }
 
@@ -109,5 +116,7 @@ function GameController (
       };
     
 }
+
+
 
 const game = GameController();

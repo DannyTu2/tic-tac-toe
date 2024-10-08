@@ -25,14 +25,78 @@ function GameBoard() {
       };
 
     const winningCondition = () => {
-        console.log("Goes into winning condition")
-        console.log("Using getValue() as well" + board[0][0].getValue())
-            if((board[0][0].getValue() === 1 && board[0][1].getValue() === 1 && board[0][2].getValue() === 1) || (board[0][0].getValue() === 2 && board[0][1].getValue() === 2 && board[0][2].getValue() === 2)  ) {
-                console.log("Player 1 is the winner")
+
+            // first row horizontal win condition
+            if((board[0][0].getValue() === 1 && board[0][1].getValue() === 1 && board[0][2].getValue() === 1)) {
+                console.log("Player 1 is the winner!")
                 return true; // trying to make it so it breaks in the for loop
-    }
-        
-    }
+            } else if((board[0][0].getValue() === 2 && board[0][1].getValue() === 2 && board[0][2].getValue() === 2)) {
+                console.log("Player 2 is the winner!");
+                return true;
+            }
+            // second row horizontal win condition
+            if((board[1][0].getValue() === 1 && board[1][1].getValue() === 1 && board[1][2].getValue() === 1)) {
+              console.log("Player 1 is the winner!")
+              return true;
+            } else if ((board[1][0].getValue() === 2 && board[1][1].getValue() === 2 && board[1][2].getValue() === 2)) {
+              console.log("Player 2 is the winner!");
+              return true;
+            }
+
+            // third row horizontal win condition
+            if((board[2][0].getValue() === 1 && board[2][1].getValue() === 1 && board[2][2].getValue() === 1)) {
+              console.log("Player 1 is the winner!")
+              return true;
+            } else if ((board[2][0].getValue() === 2 && board[2][1].getValue() === 2 && board[2][2].getValue() === 2)) {
+              console.log("Player 2 is the winner!");
+              return true;
+            }
+
+            // first vertical win condition
+            if((board[0][0].getValue() === 1 && board[1][0].getValue() === 1) && board[2][0].getValue() === 1) {
+              console.log("Player 1 is the winner")
+              return true;
+            } else if((board[0][0].getValue() === 1 && board[1][0].getValue() === 1) && board[2][0].getValue() === 1) {
+              console.log("Player 2 is the winner")
+              return true;
+            }
+
+            // second vertical win condition
+            if((board[0][1].getValue() === 1 && board[1][1].getValue() === 1) && board[2][1].getValue() === 1) {
+              console.log("Player 1 is the winner")
+              return true;
+            } else if((board[0][1].getValue() === 1 && board[1][1].getValue() === 1) && board[2][1].getValue() === 1) {
+              console.log("Player 2 is the winner")
+              return true;
+            }
+
+             // second vertical win condition
+            if((board[0][2].getValue() === 1 && board[1][2].getValue() === 1) && board[2][2].getValue() === 1) {
+              console.log("Player 1 is the winner")
+              return true;
+            } else if((board[0][2].getValue() === 1 && board[1][2].getValue() === 1) && board[2][2].getValue() === 1) {
+              console.log("Player 2 is the winner")
+              return true;
+            }
+
+            // diagonal 1
+            if((board[0][0].getValue() === 1 && board[1][1].getValue() === 1) && board[2][2].getValue() === 1) {
+              console.log("Player 1 is the winner")
+              return true;
+            } else if((board[0][0].getValue() === 1 && board[1][1].getValue() === 1) && board[2][2].getValue() === 1) {
+              console.log("Player 2 is the winner")
+              return true;
+            }            
+            
+            // diagonal 2
+            if((board[2][0].getValue() === 1 && board[1][1].getValue() === 1) && board[0][2].getValue() === 1) {
+              console.log("Player 1 is the winner")
+              return true;
+            } else if((board[2][0].getValue() === 1 && board[1][1].getValue() === 1) && board[0][2].getValue() === 1) {
+              console.log("Player 2 is the winner")
+              return true;
+            }
+          }          
     
     return {getBoard, placeToken, printBoard, winningCondition};
 }

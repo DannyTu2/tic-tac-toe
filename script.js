@@ -156,7 +156,7 @@ function GameController (
     // from 0 to 2 for row
     // from 0 to 2 for column
     // there is probably only max 
-    for(let i = 0; i < 9; i++) {
+    for(let i = 0; i <= 9; i++) {
         // for now
         // If one array is filled in the 2D array, then return winner. Horizontal Check
         // Diagonal Check
@@ -164,8 +164,17 @@ function GameController (
         // maybe create a new function called checkWinningCondition?
       const inputRow = prompt("What row number you want to input?"); 
       const inputCol = prompt("What col number you want to input?");
+
       playRound(inputRow, inputCol);
+
       if(board.winningCondition() == true) {
+        break;
+      }
+
+      // this is for the tie condition
+      // might be a bug here
+      if(board.winningCondition() == false || i === 9) {
+        console.log("Tie! Neither player wins!")
         break;
       }
        

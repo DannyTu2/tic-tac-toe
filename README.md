@@ -1,3 +1,3 @@
 # tic-tac-toe
 
-Tic-tac-toe in JavaScript.
+Tic-tac-toe game made in basic CSS, JavaScript and html.

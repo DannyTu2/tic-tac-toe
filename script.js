@@ -14,7 +14,7 @@ function GameBoard() {
 
   const placeToken = (row, column, player) => {
     const availableCells = board
-      .filter((row) => row[column].getValue() === 0)
+      .filter((row) => row[column].getValue() === "")
       .map((row) => row[column]);
     if (!availableCells.length) return;
 
@@ -28,139 +28,123 @@ function GameBoard() {
     console.log(boardWithCellValues);
   };
 
+  // need to refactor this code 
   const winningCondition = () => {
     // first row horizontal win condition
     if (
-      board[0][0].getValue() === 1 &&
-      board[0][1].getValue() === 1 &&
-      board[0][2].getValue() === 1
+      board[0][0].getValue() === "X" &&
+      board[0][1].getValue() === "X" &&
+      board[0][2].getValue() === "X"
     ) {
-      console.log("Player 1 is the winner!");
       return true; // trying to make it so it breaks in the for loop
     } else if (
-      board[0][0].getValue() === 2 &&
-      board[0][1].getValue() === 2 &&
-      board[0][2].getValue() === 2
+      board[0][0].getValue() === "O" &&
+      board[0][1].getValue() === "O" &&
+      board[0][2].getValue() === "O"
     ) {
-      console.log("Player 2 is the winner!");
       return true;
     }
     // second row horizontal win condition
     if (
-      board[1][0].getValue() === 1 &&
-      board[1][1].getValue() === 1 &&
-      board[1][2].getValue() === 1
+      board[1][0].getValue() === "X" &&
+      board[1][1].getValue() === "X" &&
+      board[1][2].getValue() === "X"
     ) {
-      console.log("Player 1 is the winner!");
       return true;
     } else if (
-      board[1][0].getValue() === 2 &&
-      board[1][1].getValue() === 2 &&
-      board[1][2].getValue() === 2
+      board[1][0].getValue() === "O" &&
+      board[1][1].getValue() === "O" &&
+      board[1][2].getValue() === "O"
     ) {
-      console.log("Player 2 is the winner!");
       return true;
     }
 
     // third row horizontal win condition
     if (
-      board[2][0].getValue() === 1 &&
-      board[2][1].getValue() === 1 &&
-      board[2][2].getValue() === 1
+      board[2][0].getValue() === "X" &&
+      board[2][1].getValue() === "X" &&
+      board[2][2].getValue() === "X"
     ) {
-      console.log("Player 1 is the winner!");
       return true;
     } else if (
-      board[2][0].getValue() === 2 &&
-      board[2][1].getValue() === 2 &&
-      board[2][2].getValue() === 2
+      board[2][0].getValue() === "O" &&
+      board[2][1].getValue() === "O" &&
+      board[2][2].getValue() === "O"
     ) {
-      console.log("Player 2 is the winner!");
       return true;
     }
 
     // first vertical win condition
     if (
-      board[0][0].getValue() === 1 &&
-      board[1][0].getValue() === 1 &&
-      board[2][0].getValue() === 1
+      board[0][0].getValue() === "X" &&
+      board[1][0].getValue() === "X" &&
+      board[2][0].getValue() === "X"
     ) {
-      console.log("Player 1 is the winner");
       return true;
     } else if (
-      board[0][0].getValue() === 1 &&
-      board[1][0].getValue() === 1 &&
-      board[2][0].getValue() === 1
+      board[0][0].getValue() === "O" &&
+      board[1][0].getValue() === "O" &&
+      board[2][0].getValue() === "O"
     ) {
-      console.log("Player 2 is the winner");
+      return true;
+    }
+
+    if (
+      board[0][1].getValue() === "X" &&
+      board[1][1].getValue() === "X" &&
+      board[2][1].getValue() === "X"
+    ) {
+      return true;
+    } else if (
+      board[0][1].getValue() === "O" &&
+      board[1][1].getValue() === "O" &&
+      board[2][1].getValue() === "O"
+    ) {
       return true;
     }
 
     // second vertical win condition
     if (
-      board[0][1].getValue() === 1 &&
-      board[1][1].getValue() === 1 &&
-      board[2][1].getValue() === 1
+      board[0][2].getValue() === "X" &&
+      board[1][2].getValue() === "X" &&
+      board[2][2].getValue() === "X"
     ) {
-      console.log("Player 1 is the winner");
       return true;
     } else if (
-      board[0][1].getValue() === 1 &&
-      board[1][1].getValue() === 1 &&
-      board[2][1].getValue() === 1
+      board[0][2].getValue() === "O" &&
+      board[1][2].getValue() === "O" &&
+      board[2][2].getValue() === "O"
     ) {
-      console.log("Player 2 is the winner");
-      return true;
-    }
-
-    // second vertical win condition
-    if (
-      board[0][2].getValue() === 1 &&
-      board[1][2].getValue() === 1 &&
-      board[2][2].getValue() === 1
-    ) {
-      console.log("Player 1 is the winner");
-      return true;
-    } else if (
-      board[0][2].getValue() === 1 &&
-      board[1][2].getValue() === 1 &&
-      board[2][2].getValue() === 1
-    ) {
-      console.log("Player 2 is the winner");
       return true;
     }
 
     // diagonal 1
     if (
-      board[0][0].getValue() === 1 &&
-      board[1][1].getValue() === 1 &&
-      board[2][2].getValue() === 1
+      board[0][0].getValue() === "X" &&
+      board[1][1].getValue() === "X" &&
+      board[2][2].getValue() === "X"
     ) {
-      console.log("Player 1 is the winner");
       return true;
     } else if (
-      board[0][0].getValue() === 1 &&
-      board[1][1].getValue() === 1 &&
-      board[2][2].getValue() === 1
+      board[0][0].getValue() === "O" &&
+      board[1][1].getValue() === "O" &&
+      board[2][2].getValue() === "O"
     ) {
-      console.log("Player 2 is the winner");
       return true;
     }
 
     // diagonal 2
     if (
-      board[2][0].getValue() === 1 &&
-      board[1][1].getValue() === 1 &&
-      board[0][2].getValue() === 1
+      board[2][0].getValue() === "X" &&
+      board[1][1].getValue() === "X" &&
+      board[0][2].getValue() === "X"
     ) {
-      console.log("Player 1 is the winner");
       return true;
     } else if (
-      board[2][0].getValue() === 1 &&
-      board[1][1].getValue() === 1 &&
-      board[0][2].getValue() === 1
+      board[2][0].getValue() === "O" &&
+      board[1][1].getValue() === "O" &&
+      board[0][2].getValue() === "O"
     ) {
-      console.log("Player 2 is the winner");
       return true;
     }
   };
@@ -169,7 +153,7 @@ function GameBoard() {
 }
 
 function Cell() {
-  let value = 0;
+  let value = "";
 
   const addToken = (player) => {
     value = player;
@@ -192,11 +176,11 @@ function GameController(
   const players = [
     {
       name: playerOneName,
-      token: 1,
+      token: "X",
     },
     {
       name: playerTwoName,
-      token: 2,
+      token: "O",
     },
   ];
 
@@ -215,46 +199,38 @@ function GameController(
 
   const playRound = (row, col) => {
     board.placeToken(row, col, getActivePlayer().token);
+
+    if(board.winningCondition() == true) {
+      console.log(`${getActivePlayer().name}'s is the winner`);
+      return;
+    }
+
     switchPlayerTurn();
     printNewRound();
   };
 
-  // for (let i = 0; i <= 9; i++) {
-  //   // const inputRow = prompt("What row number you want to input?");
-  //   // const inputCol = prompt("What col number you want to input?");
-  //   // playRound(inputRow, inputCol);
-
-  //   if (board.winningCondition() == true) {
-  //     break;
-  //   }
-
-  //   if (board.winningCondition() == false || i === 9) {
-  //     console.log("Tie! Neither player wins!");
-  //     break;
-  //   }
-  // }
-
+  
   printNewRound();
 
   return {
     playRound,
     getActivePlayer,
-    getBoard:board.getBoard
+    getBoard: board.getBoard,
+    winningCondition: board.winningCondition
   };
 }
 
-function ScreenController () {
+function ScreenController() {
   const game = GameController();
-  const playerTurnDiv = document.querySelector('.turn');
-  const boardDiv = document.querySelector('.board');
+  const playerTurnDiv = document.querySelector(".turn");
+  const boardDiv = document.querySelector(".board");
 
   const updateScreen = () => {
     boardDiv.textContent = "";
-
     const board = game.getBoard();
     const activePlayer = game.getActivePlayer();
 
-    playerTurnDiv.textContent = `${activePlayer.name}'s turn...`
+    playerTurnDiv.textContent = `${activePlayer.name}'s turn...`;
 
     board.forEach((row, indexRow) => {
       row.forEach((cell, indexCol) => {
@@ -263,14 +239,18 @@ function ScreenController () {
         cellButton.dataset.column = indexCol;
         cellButton.dataset.row = indexRow;
         cellButton.textContent = cell.getValue();
-        boardDiv.appendChild(cellButton)
-      })
-    })
-  }
+        boardDiv.appendChild(cellButton);
+      });
+    });
+
+  };
 
   function clickHandlerBoard(e) {
     const selectedColumn = e.target.dataset.column;
     const selectedRow = e.target.dataset.row;
+    if(game.winningCondition()) {
+      return;
+    }
     game.playRound(selectedRow, selectedColumn);
     updateScreen();
   }
@@ -281,5 +261,3 @@ function ScreenController () {
 }
 
 ScreenController();
-
-// const game = GameController();

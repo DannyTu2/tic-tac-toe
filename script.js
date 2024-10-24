@@ -219,34 +219,67 @@ function GameController(
     printNewRound();
   };
 
-  // possible coordinate you can input
-  // from 0 to 2 for row
-  // from 0 to 2 for column
-  // there is probably only max
-  for (let i = 0; i <= 9; i++) {
-    const inputRow = prompt("What row number you want to input?");
-    const inputCol = prompt("What col number you want to input?");
+  // for (let i = 0; i <= 9; i++) {
+  //   // const inputRow = prompt("What row number you want to input?");
+  //   // const inputCol = prompt("What col number you want to input?");
+  //   // playRound(inputRow, inputCol);
 
-    playRound(inputRow, inputCol);
+  //   if (board.winningCondition() == true) {
+  //     break;
+  //   }
 
-    if (board.winningCondition() == true) {
-      break;
-    }
-
-    // this is for the tie condition
-    // might be a bug here
-    if (board.winningCondition() == false || i === 9) {
-      console.log("Tie! Neither player wins!");
-      break;
-    }
-  }
+  //   if (board.winningCondition() == false || i === 9) {
+  //     console.log("Tie! Neither player wins!");
+  //     break;
+  //   }
+  // }
 
   printNewRound();
 
   return {
     playRound,
     getActivePlayer,
+    getBoard:board.getBoard
   };
 }
 
-const game = GameController();
+function ScreenController () {
+  const game = GameController();
+  const playerTurnDiv = document.querySelector('.turn');
+  const boardDiv = document.querySelector('.board');
+
+  const updateScreen = () => {
+    boardDiv.textContent = "";
+
+    const board = game.getBoard();
+    const activePlayer = game.getActivePlayer();
+
+    playerTurnDiv.textContent = `${activePlayer.name}'s turn...`
+
+    board.forEach((row, indexRow) => {
+      row.forEach((cell, indexCol) => {
+        const cellButton = document.createElement("button");
+        cellButton.classList.add("cell");
+        cellButton.dataset.column = indexCol;
+        cellButton.dataset.row = indexRow;
+        cellButton.textContent = cell.getValue();
+        boardDiv.appendChild(cellButton)
+      })
+    })
+  }
+
+  function clickHandlerBoard(e) {
+    const selectedColumn = e.target.dataset.column;
+    const selectedRow = e.target.dataset.row;
+    game.playRound(selectedRow, selectedColumn);
+    updateScreen();
+  }
+  boardDiv.addEventListener("click", clickHandlerBoard);
+
+  updateScreen();
+
+}
+
+ScreenController();
+
+// const game = GameController();

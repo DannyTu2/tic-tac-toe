@@ -19,5 +19,10 @@
     border: 1px solid grey;
     background:lightyellow;
     cursor:pointer;
+}
 
+.winner, .title, .turn {
+    font-family: 'Courier New', Courier, monospace;
+    font-size:50px;
+    font-weight: bold;
 }

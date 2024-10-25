@@ -19,6 +19,7 @@ function GameBoard() {
     if (!availableCells.length) return;
 
     board[row][column].addToken(player);
+
   };
 
   const printBoard = () => {
@@ -28,7 +29,7 @@ function GameBoard() {
     console.log(boardWithCellValues);
   };
 
-  // need to refactor this code 
+  // need to refactor this code
   const winningCondition = () => {
     // first row horizontal win condition
     if (
@@ -147,6 +148,7 @@ function GameBoard() {
     ) {
       return true;
     }
+    return false;
   };
 
   return { getBoard, placeToken, printBoard, winningCondition };
@@ -199,8 +201,7 @@ function GameController(
 
   const playRound = (row, col) => {
     board.placeToken(row, col, getActivePlayer().token);
-
-    if(board.winningCondition() == true) {
+    if (board.winningCondition() == true) {
       console.log(`${getActivePlayer().name}'s is the winner`);
       return;
     }
@@ -209,14 +210,13 @@ function GameController(
     printNewRound();
   };
 
-  
   printNewRound();
 
   return {
     playRound,
     getActivePlayer,
     getBoard: board.getBoard,
-    winningCondition: board.winningCondition
+    winningCondition: board.winningCondition,
   };
 }
 
@@ -224,6 +224,8 @@ function ScreenController() {
   const game = GameController();
   const playerTurnDiv = document.querySelector(".turn");
   const boardDiv = document.querySelector(".board");
+  const board = game.getBoard();
+  const activePlayer = game.getActivePlayer();
 
   const updateScreen = () => {
     boardDiv.textContent = "";
@@ -242,22 +244,25 @@ function ScreenController() {
         boardDiv.appendChild(cellButton);
       });
     });
-
   };
 
   function clickHandlerBoard(e) {
+    const winnerDiv = document.querySelector(".winner");
     const selectedColumn = e.target.dataset.column;
     const selectedRow = e.target.dataset.row;
-    if(game.winningCondition()) {
+    if (game.winningCondition()) {
+      winnerDiv.textContent = `${activePlayer.name}'s is the winner!`;
       return;
     }
-    game.playRound(selectedRow, selectedColumn);
+    if(board[selectedRow][selectedColumn].getValue() == ""){
+      game.playRound(selectedRow, selectedColumn);
+    }
+
     updateScreen();
   }
   boardDiv.addEventListener("click", clickHandlerBoard);
 
   updateScreen();
-
 }
 
 ScreenController();

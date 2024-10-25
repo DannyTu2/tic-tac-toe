@@ -19,7 +19,6 @@ function GameBoard() {
     if (!availableCells.length) return;
 
     board[row][column].addToken(player);
-
   };
 
   const printBoard = () => {
@@ -254,7 +253,7 @@ function ScreenController() {
       winnerDiv.textContent = `${activePlayer.name}'s is the winner!`;
       return;
     }
-    if(board[selectedRow][selectedColumn].getValue() == ""){
+    if (board[selectedRow][selectedColumn].getValue() == "") {
       game.playRound(selectedRow, selectedColumn);
     }
 

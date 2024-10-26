@@ -224,6 +224,7 @@ function ScreenController() {
   const playerTurnDiv = document.querySelector(".turn");
   const boardDiv = document.querySelector(".board");
   const board = game.getBoard();
+  const clearButton = document.querySelector(".clearButton");
   const activePlayer = game.getActivePlayer();
 
   const updateScreen = () => {
@@ -259,8 +260,20 @@ function ScreenController() {
 
     updateScreen();
   }
-  boardDiv.addEventListener("click", clickHandlerBoard);
 
+  function clickClearBoard(e) {
+    const cellButton = document.querySelector("button")
+    board.forEach(row => {
+      row.forEach(cell => {
+        cellButton.textContent = "";
+      });
+    });
+
+  }
+
+
+  boardDiv.addEventListener("click", clickHandlerBoard);
+  clearButton.addEventListener("click", clickClearBoard);
   updateScreen();
 }
 

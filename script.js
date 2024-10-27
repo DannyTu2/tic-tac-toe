@@ -28,6 +28,15 @@ function GameBoard() {
     console.log(boardWithCellValues);
   };
 
+  const clearBoard = () => {
+    board.forEach(row =>
+      row.forEach(cell =>
+        cell.clear()
+      )
+    )
+
+  }
+
   // need to refactor this code
   const winningCondition = () => {
     // first row horizontal win condition
@@ -150,7 +159,7 @@ function GameBoard() {
     return false;
   };
 
-  return { getBoard, placeToken, printBoard, winningCondition };
+  return { getBoard, placeToken, printBoard, winningCondition, clearBoard };
 }
 
 function Cell() {
@@ -162,9 +171,14 @@ function Cell() {
 
   const getValue = () => value;
 
+  const clear = () => {
+    value = "";
+  }
+
   return {
     addToken,
     getValue,
+    clear,
   };
 }
 
@@ -193,6 +207,11 @@ function GameController(
 
   const getActivePlayer = () => activePlayer;
 
+  const resetGame = () => {
+    activePlayer = players[0];
+    board.clearBoard();
+  }
+
   const printNewRound = () => {
     board.printBoard();
     console.log(`${getActivePlayer().name}'s turn.`);
@@ -216,6 +235,7 @@ function GameController(
     getActivePlayer,
     getBoard: board.getBoard,
     winningCondition: board.winningCondition,
+    resetGame,
   };
 }
 
@@ -262,15 +282,9 @@ function ScreenController() {
   }
 
   function clickClearBoard(e) {
-    const cellButton = document.querySelector("button")
-    board.forEach(row => {
-      row.forEach(cell => {
-        cellButton.textContent = "";
-      });
-    });
-
+    game.resetGame();
+    updateScreen();
   }
-
 
   boardDiv.addEventListener("click", clickHandlerBoard);
   clearButton.addEventListener("click", clickClearBoard);

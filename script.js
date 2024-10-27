@@ -282,8 +282,10 @@ function ScreenController() {
   }
 
   function clickClearBoard(e) {
+    const winnerDiv = document.querySelector(".winner");
     game.resetGame();
     updateScreen();
+    winnerDiv.textContent="";
   }
 
   boardDiv.addEventListener("click", clickHandlerBoard);

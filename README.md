@@ -3,7 +3,6 @@
 Tic-tac-toe game made in basic CSS, JavaScript and HTML.
 
 Future Implementations:
- - Clear function
  - Refactor winning condition
  - Keep track scores
 
